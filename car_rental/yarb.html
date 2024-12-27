@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental</title>
+    <link rel="stylesheet" href="yarb.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Car Table Section -->
+        <div class="table-section">
+            <h1>Car Rental Table</h1>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search...">
+            </div>
+
+            <!-- Filter Button -->
+            <button id="filterButton">Apply Filters</button>
+
+            <!-- Car Table -->
+            <table id="carTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Company <span id="sort-arrow-make">&#x2195;</span></th>
+                        <th onclick="sortTable(1)">Model <span id="sort-arrow-model">&#x2195;</span></th>
+                        <th onclick="sortTable(2)">Year <span id="sort-arrow-year">&#x2195;</span></th>
+                        <th onclick="sortTable(3)">Fuel Type <span id="sort-arrow-fuel">&#x2195;</span></th>
+                        <th onclick="sortTable(4)">No. Seats <span id="sort-arrow-seats">&#x2195;</span></th>
+                        <th onclick="sortTable(5)">Price per Day <span id="sort-arrow-price">&#x2195;</span></th>
+                        <th>Location</th> <!-- Changed "Status" to "Location" -->
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tesla</td>
+                        <td>Model S</td>
+                        <td>2021</td>
+                        <td>Electric</td>
+                        <td>4</td>
+                        <td>$150</td>
+                        <td>New York</td> <!-- Example location -->
+                        <td><button>Book</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ford</td>
+                        <td>Mustang</td>
+                        <td>2020</td>
+                        <td>Gas</td>
+                        <td>4</td>
+                        <td>$80</td>
+                        <td>Los Angeles</td> <!-- Example location -->
+                        <td><button>Book</button></td>
+                    </tr>
+                    <tr>
+                        <td>Chevrolet</td>
+                        <td>Impala</td>
+                        <td>2019</td>
+                        <td>Hybrid</td>
+                        <td>5</td>
+                        <td>$100</td>
+                        <td>Chicago</td> <!-- Example location -->
+                        <td><button>Book</button></td>
+                    </tr>
+                    <tr>
+                        <td>BMW</td>
+                        <td>X5</td>
+                        <td>2023</td>
+                        <td>Diesel</td>
+                        <td>7</td>
+                        <td>$120</td>
+                        <td>Miami</td> <!-- Example location -->
+                        <td><button>Book</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-container">
+            <h2>Filters</h2>
+
+            <!-- Company Filter -->
+            <div>
+                <h3>Company</h3>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox company" value="Tesla">
+                    <div class="checkmark"></div>
+                    <span class="label">Tesla</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox company" value="Ford">
+                    <div class="checkmark"></div>
+                    <span class="label">Ford</span>
+                </label>
+            </div>
+
+            <!-- Fuel Type Filter -->
+            <div>
+                <h3>Fuel Type</h3>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox fuel" value="Electric">
+                    <div class="checkmark"></div>
+                    <span class="label">Electric</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox fuel" value="Gas">
+                    <div class="checkmark"></div>
+                    <span class="label">Gas</span>
+                </label>
+            </div>
+
+            <!-- Location Filter -->
+            <div>
+                <h3>Location</h3>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox location" value="New York">
+                    <div class="checkmark"></div>
+                    <span class="label">New York</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox location" value="Los Angeles">
+                    <div class="checkmark"></div>
+                    <span class="label">Los Angeles</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox location" value="Chicago">
+                    <div class="checkmark"></div>
+                    <span class="label">Chicago</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="filter-checkbox location" value="Miami">
+                    <div class="checkmark"></div>
+                    <span class="label">Miami</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="yarb.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="hassan.css.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Details</h1>
+        <div class="car-details">
+            <h2>Model: <span id="carModel"><?= htmlspecialchars($car['model']) ?></span></h2>
+            <p id="carSeats">Seats: <?= htmlspecialchars($car['no_seats']) ?></p>
+            <p id="carTransmission">Transmission: <?= htmlspecialchars($car['transmission']) ?></p>
+            <p id="carType">Type: <?= htmlspecialchars($car['type']) ?></p>
+            <p id="carYear">Year: <?= htmlspecialchars($car['year']) ?></p>
+            <p id="carStatus">Status: <?= htmlspecialchars($car['status']) ?></p>
+            
+            <!-- Separate button for booking -->
+            <button id="bookCar" class="btn">Book This Car</button>
+        </div>
+    </div>
+
+    <!-- Link the external JavaScript file -->
+    <script src="scripts.js"></script>
+</body>
+</html>
