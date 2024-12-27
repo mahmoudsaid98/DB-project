@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // التحقق من أن كلمة المرور تحتوي على حروف كبيرة، حروف صغيرة، أرقام، ورموز خاصة
-    if (!preg_match("/[A-Z]/", $cust_password) || !preg_match("/[a-z]/", $cust_password) || !preg_match("/[0-9]/", $cust_password) || !preg_match("/[\W_]/", $cust_password)) {
+    if (!preg_match("/[A-Z]/", $cust_password) || !preg_match("/[a-z]/", $cust_password) || !preg_match("/[0-9]/", $cust_password) ) {
         $_SESSION['error_message'] = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character!";
         header("Location: register.php");
         exit;
@@ -133,5 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
+
 
 
