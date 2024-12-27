@@ -13,8 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $servername = "localhost"; // اسم السيرفر
     $dbusername = "root";      // اسم المستخدم لقاعدة البيانات
     $dbpassword = "";          // كلمة المرور لقاعدة البيانات
-    $dbname = "car_rental";
-    // اسم قاعدة البيانات
+    $dbname = "car_rental";    // اسم قاعدة البيانات
 
     // إنشاء الاتصال
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -24,21 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // التحقق من وجود الإدمن في قاعدة البيانات
-    $sql = "SELECT * FROM admin WHERE email = ?"; // افترضنا استخدام البريد الإلكتروني بدلاً من اسم المستخدم
+    // التحقق من وجود المدير في قاعدة البيانات
+    $sql = "SELECT * FROM admin WHERE admin_email = ?"; // استخدام البريد الإلكتروني للتحقق
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email); // ربط البريد الإلكتروني بالاستعلام
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // إذا تم العثور على الإدمن
+        // إذا تم العثور على المدير
         $admin = $result->fetch_assoc();
-        if (password_verify($password, $admin['password'])) {
+        if (password_verify($password, $admin['admin_password'])) {
             // إذا كانت كلمة المرور صحيحة
-            $_SESSION['admin_id'] = $admin['id'];  // تخزين معرف الإدمن في الجلسة
+            $_SESSION['admin_id'] = $admin['admin_id'];  // تخزين معرف المدير في الجلسة
             $_SESSION['success_message'] = "Login successful as Admin.";
-            header("Location: manage_users.php");  // إعادة التوجيه إلى صفحة إدارة المستخدمين
+            header("Location: add_car.php");  // إعادة التوجيه إلى صفحة إضافة السيارات
             exit;
         } else {
             $_SESSION['error_message'] = "Invalid email or password.";
@@ -64,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="main">
         <h1>Admin Login</h1>
-        <form action="admin_edit.html" method="POST">
+        <form action="adminlogin.php" method="POST">
             <label for="email">Email:</label><br>
             <input type="email" name="email" id="email" placeholder="Enter your email" required><br><br>
 
@@ -89,4 +88,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
-
