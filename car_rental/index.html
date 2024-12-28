@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="styless2.css">
+</head>
+<body>
+    <form class="form" action="process_reservation.php" method="POST">
+        <h1 class="title">Car Reservation</h1>
+
+        <!-- Car Details Section -->
+        <h2>Car Details</h2>
+        <label>
+            <input class="input" type="text" id="company" readonly>
+            <span>Company</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="model" readonly>
+            <span>Model</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="year" readonly>
+            <span>Year</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="transmission" readonly>
+            <span>Transmission</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="fuel_type" readonly>
+            <span>Fuel Type</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="no_seats" readonly>
+            <span>No. of Seats</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="office_location" readonly>
+            <span>Office Location</span>
+        </label>
+        <label>
+            <input class="input" type="text" id="plate_id" readonly>
+            <span>Plate ID</span>
+        </label>
+
+        <!-- Reservation Dates -->
+        <h2>Reservation Details</h2>
+        <label>
+            <input class="input" type="date" name="pickup_date" placeholder=" " required>
+            <span>Pickup Date</span>
+        </label>
+        <label>
+            <input class="input" type="date" name="return_date" placeholder=" " required>
+            <span>Return Date</span>
+        </label>
+
+        <!-- Hidden Car ID -->
+        <input type="hidden" name="car_id" id="car_id">
+
+        <!-- Proceed to Payment Button -->
+        <button type="button" id="proceedToPayment" class="submit">Proceed to Payment</button>
+    </form>
+    <script src="payment_script.js"></script>
+    <script src="scripts2.js"></script>
+</body>
+</html>
