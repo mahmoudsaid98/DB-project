@@ -1,44 +1,44 @@
 <?php
-// بدء الجلسة
+// Start the session
 session_start();
 
-// التحقق مما إذا كانت البيانات قد أُرسلت عبر POST
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // استلام البيانات من النموذج
+    // Retrieve form data
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // الاتصال بقاعدة البيانات
-    $servername = "localhost"; // اسم السيرفر
-    $dbusername = "root";      // اسم المستخدم لقاعدة البيانات
-    $dbpassword = "";          // كلمة المرور لقاعدة البيانات
-    $dbname = "car_rental";    // اسم قاعدة البيانات
+    // Database connection details
+    $servername = "localhost"; // Server name
+    $dbusername = "root";      // Database username
+    $dbpassword = "";          // Database password
+    $dbname = "car_rental";    // Database name
 
-    // إنشاء الاتصال
+    // Create a connection
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-    // التحقق من الاتصال
+    // Check the connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // الاستعلام للتحقق من وجود البريد الإلكتروني وكلمة المرور في جدول "customers"
+    // Query to check if the email exists in the "customers" table
     $sql = "SELECT * FROM customers WHERE cust_email = ?";
 
-    // تحضير الاستعلام
+    // Prepare the query
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email); // ربط البريد الإلكتروني مع الاستعلام
+    $stmt->bind_param("s", $email); // Bind the email to the query
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // إذا تم العثور على المستخدم، نتحقق من كلمة المرور
+        // If a user is found, verify the password
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['cust_password'])) {
-            // تسجيل الدخول ناجح
-            $_SESSION['user_id'] = $row['customer_id'];  // تخزين معرف العميل في الجلسة
+            // Login successful
+            $_SESSION['user_id'] = $row['customer_id'];  // Store customer ID in the session
             $_SESSION['success_message'] = "Login successful!";
-            header("Location: dashboard.php");  // إعادة التوجيه إلى لوحة التحكم
+            header("Location: dashboard.php");  // Redirect to the dashboard
             exit;
         } else {
             $_SESSION['error_message'] = "Incorrect password.";
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['error_message'] = "No user found with that email.";
     }
 
-    // إغلاق الاتصال بقاعدة البيانات
+    // Close the database connection
     $stmt->close();
     $conn->close();
 }
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1>Log in</h1>
         <i>Welcome</i><br><br>
 
-        <!-- نموذج تسجيل الدخول -->
+        <!-- Login form -->
         <form action="index.php" method="POST">
             <label for="email">Email:</label><br>
             <input type="email" name="email" id="email" placeholder="Enter your email" required><br><br>
@@ -77,24 +77,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="submit" name="submit" id="submit" value="Log in"><br>
         </form>
 
-        <!-- عرض رسالة النجاح أو الخطأ -->
+        <!-- Display success or error messages -->
         <?php
         if (isset($_SESSION['error_message'])) {
             echo "<p style='color: red;'>".$_SESSION['error_message']."</p>";
-            unset($_SESSION['error_message']);  // إزالة الرسالة بعد عرضها
+            unset($_SESSION['error_message']);  // Clear the message after displaying it
         }
         if (isset($_SESSION['success_message'])) {
             echo "<p style='color: green;'>".$_SESSION['success_message']."</p>";
-            unset($_SESSION['success_message']);  // إزالة الرسالة بعد عرضها
+            unset($_SESSION['success_message']);  // Clear the message after displaying it
         }
         ?>
 
         <h3>or</h3><br>
 
-        <!-- روابط إضافية -->
+        <!-- Additional links -->
         <a id="register" href="register.php">Register</a><br><br>
         <a id="login-admin" href="adminlogin.php">Login as Admin</a>
     </div>
 </body>
 </html>
-
