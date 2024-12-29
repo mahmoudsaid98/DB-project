@@ -1,52 +1,67 @@
 <?php
-// اتصال بقاعدة البيانات
-$servername = "localhost"; // اسم المضيف
-$username = "root"; // اسم المستخدم الافتراضي لـ XAMPP
-$password = ""; // كلمة المرور الافتراضية لـ XAMPP
-$dbname = "car_rental"; // اسم قاعدة البيانات
+// Database connection details
+$servername = "localhost"; // Hostname
+$username = "root"; // Default username for XAMPP
+$password = ""; // Default password for XAMPP
+$dbname = "car_rental"; // Name of the database
 
-// إنشاء اتصال
+// Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// التحقق من الاتصال
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// التحقق مما إذا كان الطلب من النوع POST
+// Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // جلب البيانات من النموذج
-    $make = $_POST['make'];
-    $model = $_POST['model'];
-    $year = $_POST['year'];
-    $transmission = $_POST['transmission'];
-    $no_seats = $_POST['no_seats'];
-    $plate_id = $_POST['plate_id'];
-    $fuel_type = $_POST['fuel_type'];
-    $price_per_day = $_POST['price_per_day'];
-    $status = $_POST['status'];
-    $office_id = $_POST['office_id'];
+    // Retrieve form data
+    $company = $_POST['company']; // The manufacturing company
+    $model = $_POST['model']; // Car model
+    $year = $_POST['year']; // Manufacturing year
+    $transmission = $_POST['transmission']; // Transmission type (Manual/Automatic)
+    $no_seats = $_POST['no_seats']; // Number of seats
+    $plate_id = $_POST['plate_id']; // Unique plate ID
+    $fuel_type = $_POST['fuel_type']; // Fuel type (Gasoline/Diesel/Electric/Hybrid)
+    $price_per_day = $_POST['price_per_day']; // Rental price per day
+    $status = $_POST['status']; // Car status (active, out of service, rented)
+    $office_id = $_POST['office_id']; // Office ID where the car is located
 
-    // استعلام الإدخال
-    $sql = "INSERT INTO cars (make, model, year, transmission, no_seats, plate_id, fuel_type, price_per_day, status, office_id) 
+    // SQL query to insert data into the 'cars' table
+    $sql = "INSERT INTO cars (company, model, year, transmission, fuel_type, no_seats, plate_id, status, price_per_day, office_id) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // إعداد الاستعلام
+    // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssisisdssi", $make, $model, $year, $transmission, $no_seats, $plate_id, $fuel_type, $price_per_day, $status, $office_id);
 
-    // تنفيذ الاستعلام والتحقق
+    // Bind parameters to the SQL query
+    $stmt->bind_param(
+        "ssissssssd", // Data types: s = string, i = integer, d = double
+        $company,
+        $model,
+        $year,
+        $transmission,
+        $fuel_type,
+        $no_seats,
+        $plate_id,
+        $status,
+        $price_per_day,
+        $office_id
+    );
+
+    // Execute the SQL query and check if successful
     if ($stmt->execute()) {
         echo "New car added successfully!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
-    // إغلاق البيان والاتصال
+    // Close the statement and connection
     $stmt->close();
 }
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
