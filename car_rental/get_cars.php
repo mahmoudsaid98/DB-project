@@ -1,6 +1,4 @@
 <?php
-header('Content-Type: application/json');
-
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -11,27 +9,23 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die(json_encode(['error' => 'Connection failed: ' . $conn->connect_error]));
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch car details using prepared statements
-$car_id = isset($_GET['car_id']) ? intval($_GET['car_id']) : 1;
+// Query to fetch available cars
+$sql = "SELECT car_id, company, model, price_per_day FROM cars WHERE status = 'active'";
+$result = $conn->query($sql);
 
-$stmt = $conn->prepare("SELECT c.company, c.model, c.year, c.transmission, c.fuel_type, c.no_seats, c.plate_id, o.location 
-                        FROM cars c
-                        INNER JOIN office o ON c.office_id = o.office_id
-                        WHERE c.car_id = ?");
-$stmt->bind_param("i", $car_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
+$cars = [];
 if ($result->num_rows > 0) {
-    $car = $result->fetch_assoc();
-    echo json_encode($car);
-} else {
-    echo json_encode(['error' => 'Car not found']);
+    while ($row = $result->fetch_assoc()) {
+        $cars[] = $row;
+    }
 }
 
-$stmt->close();
+// Return data as JSON
+header("Content-Type: application/json");
+echo json_encode($cars);
+
 $conn->close();
 ?>

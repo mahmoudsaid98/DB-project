@@ -55,9 +55,3 @@ document.getElementById('searchBar').addEventListener('input', searchTable);
 
 // Add event listener to filter button
 document.getElementById('filterButton').addEventListener('click', filterTable);
-
-// Initialize filters and search when the page loads
-window.onload = () => {
-    searchTable(); // Initial search filtering
-    filterTable(); // Initial filter application
-};
