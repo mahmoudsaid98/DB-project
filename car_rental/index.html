@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styless2.css">
 </head>
 <body>
-    <form class="form" action="process_reservation.php" method="POST">
+    <form class="form" action="payment.html" method="get">
         <h1 class="title">Car Reservation</h1>
 
         <!-- Car Details Section -->
@@ -25,10 +25,6 @@
             <span>Year</span>
         </label>
         <label>
-            <input class="input" type="text" id="transmission" readonly>
-            <span>Transmission</span>
-        </label>
-        <label>
             <input class="input" type="text" id="fuel_type" readonly>
             <span>Fuel Type</span>
         </label>
@@ -37,12 +33,12 @@
             <span>No. of Seats</span>
         </label>
         <label>
-            <input class="input" type="text" id="office_location" readonly>
-            <span>Office Location</span>
+            <input class="input" type="text" id="price_per_day" readonly>
+            <span>Price per Day</span>
         </label>
         <label>
-            <input class="input" type="text" id="plate_id" readonly>
-            <span>Plate ID</span>
+            <input class="input" type="text" id="car_id" readonly>
+            <span>Car ID</span>
         </label>
 
         <!-- Reservation Dates -->
@@ -56,13 +52,70 @@
             <span>Return Date</span>
         </label>
 
-        <!-- Hidden Car ID -->
-        <input type="hidden" name="car_id" id="car_id">
-
-        <!-- Proceed to Payment Button -->
-        <button type="button" id="proceedToPayment" class="submit">Proceed to Payment</button>
+        <button type="submit" class="submit">Proceed to Payment</button>
     </form>
-    <script src="payment_script.js"></script>
-    <script src="scripts2.js"></script>
+
+    <script>
+        // Function to get URL query parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const queryArray = queryString.split("&");
+
+            queryArray.forEach(query => {
+                const [key, value] = query.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+
+            return params;
+        }
+
+        // Populate form fields with car data
+        function populateCarDetails() {
+            const params = getQueryParams();
+
+            document.getElementById('company').value = params.company || '';
+            document.getElementById('model').value = params.model || '';
+            document.getElementById('year').value = params.year || '';
+            document.getElementById('fuel_type').value = params.fuel_type || '';
+            document.getElementById('no_seats').value = params.no_seats || '';
+            document.getElementById('price_per_day').value = params.price_per_day || '';
+            document.getElementById('car_id').value = params.car_id || '';
+        }
+
+        // Calculate total amount and redirect
+        document.querySelector('.form').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Get input values
+            const pricePerDay = parseFloat(document.getElementById('price_per_day').value) || 0;
+            const pickupDate = new Date(document.querySelector('input[name="pickup_date"]').value);
+            const returnDate = new Date(document.querySelector('input[name="return_date"]').value);
+
+            // Calculate the number of days
+            const timeDifference = returnDate - pickupDate;
+            const numberOfDays = timeDifference > 0 ? timeDifference / (1000 * 60 * 60 * 24) : 0;
+
+            // Calculate the total amount
+            const totalAmount = (pricePerDay * numberOfDays).toFixed(2);
+
+            // Add total amount to the URL as a query parameter
+            const form = event.target;
+            const action = new URL(form.action);
+            action.searchParams.set('total_amount', totalAmount);
+
+            // Append other existing query parameters
+            const params = new URLSearchParams(new FormData(form));
+            params.forEach((value, key) => {
+                action.searchParams.set(key, value);
+            });
+
+            // Redirect to the modified URL
+            window.location.href = action.toString();
+        });
+
+        // Populate the form when the page loads
+        window.onload = populateCarDetails;
+    </script>
 </body>
 </html>
