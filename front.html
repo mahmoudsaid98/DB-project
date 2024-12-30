@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Car Rental Reports</h1>
+
+        <!-- Reservations within a period -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required>
+            </div>
+            <button type="submit" name="action" value="reservations_period">View Reservations</button>
+        </form>
+
+        <!-- Status of all cars on a specific day -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="status_date">Date:</label>
+                <input type="date" id="status_date" name="status_date" required>
+            </div>
+            <button type="submit" name="action" value="car_status">View Car Status</button>
+        </form>
+
+        <!-- Reservations of a specific customer -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="customer_id">Customer ID:</label>
+                <input type="number" id="customer_id" name="customer_id" required>
+            </div>
+            <button type="submit" name="action" value="customer_reservations">View Customer Reservations</button>
+        </form>
+
+        <!-- Payments within a specific period -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="payment_start_date">Start Date:</label>
+                <input type="date" id="payment_start_date" name="payment_start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="payment_end_date">End Date:</label>
+                <input type="date" id="payment_end_date" name="payment_end_date" required>
+            </div>
+            <button type="submit" name="action" value="daily_payments">View Payments</button>
+        </form>
+    </div>
+</body>
+</html>

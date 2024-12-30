@@ -1,0 +1,235 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Body Styling */
+body {
+    background: linear-gradient(135deg, #111, #222);
+    font-family: 'Roboto', sans-serif;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Main Headings */
+h1, h2, h3 {
+    color: #ff4081; /* Bright pink for contrast */
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(255, 64, 129, 0.7);
+}
+
+h2, h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(255, 64, 129, 0.5);
+}
+
+/* Container for Table and Filter */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+/* Table Section */
+.table-section {
+    background-color: #2b2b2b; /* Dark gray */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+    flex: 1;
+    min-width: 600px;
+    padding: 30px;
+    animation: slideIn 0.5s ease-in-out;
+    border: 2px solid #ff4081; /* Pink border */
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+    border: 1px solid #444;
+    border-radius: 5px;
+}
+
+table th {
+    background-color: #ff4081;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+table td {
+    background-color: #333;
+    color: #ccc;
+    transition: background-color 0.3s ease;
+}
+
+table tr:hover td {
+    background-color: #444; /* Hover effect */
+}
+
+button {
+    background-color: #ff4081;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #e0316b;
+    transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: #eee;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #ff4081;
+    outline: none;
+    background-color: #333;
+}
+
+/* Filter Section */
+.filter-container {
+    background-color: #333;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+    width: 300px;
+    border: 2px solid #ff4081; /* Pink border */
+    margin-top: 20px;
+}
+
+.filter-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.filter-container .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.filter-container .checkbox-wrapper input {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #888;
+    background-color: #111;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-container .checkbox-wrapper input:checked {
+    background-color: #ff4081;
+    border-color: #ff4081;
+}
+
+.filter-container .checkbox-wrapper .label {
+    font-size: 1rem;
+    color: #ccc;
+    margin-left: 10px;
+}
+
+.filter-container .checkbox-wrapper:hover input {
+    background-color: #e0316b;
+    border-color: #e0316b;
+}
+
+/* Button */
+#filterButton {
+    padding: 12px 20px;
+    background-color: #ff4081;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#filterButton:hover {
+    background-color: #e0316b;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .filter-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .table-section {
+        min-width: 100%;
+    }
+}

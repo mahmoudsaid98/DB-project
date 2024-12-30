@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="styless2.css">
+</head>
+<body>
+    <div class="form">
+        <h1 class="title">Payment</h1>
+        <h2>Payment Method</h2>
+        <select id="paymentMethod" class="input" required>
+          <option value=""disabled selected>Select Payment Method</option>
+            <option value="credit_card">Credit Card</option>
+            <option value="cash">Cash</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <p>Cash to Pay: <span id="cashToPay">0.00</span></p>
+        <button id="bookNow" class="submit">Book Now</button>
+    </div>
+
+    <script>
+        // Function to retrieve the query parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const queryArray = queryString.split("&");
+
+            queryArray.forEach(query => {
+                const [key, value] = query.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+
+            return params;
+        }
+
+        // Display the total amount on the payment page
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = getQueryParams();
+            const totalAmount = params.total_amount || '0.00';
+
+            // Update the displayed amount
+            document.getElementById('cashToPay').innerText = totalAmount;
+
+            // Handle "Book Now" button click
+            document.getElementById('bookNow').addEventListener('click', () => {
+                const paymentMethod = document.getElementById('paymentMethod').value;
+
+                if (!paymentMethod) {
+                    alert('Please select a payment method.');
+                    return;
+                }
+
+                alert(`Payment method: ${paymentMethod}\nAmount to Pay: ${totalAmount}`);
+            });
+        });
+    </script>
+</body>
+</html>

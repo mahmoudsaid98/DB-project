@@ -1,0 +1,123 @@
+/* Basic styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0e0e0e; /* Gotham night sky dark black background */
+    margin: 0;
+    padding: 0;
+    color: #ecf0f1; /* Light text for high contrast */
+}
+
+.table-container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+h1 {
+    color: #f1c40f; /* Bat-Signal yellow for the title */
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Subtle glow effect */
+    margin-bottom: 30px;
+}
+
+/* Styling for table */
+.car-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Darker shadows for Gotham mood */
+    overflow: hidden;
+}
+
+.car-table th, .car-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #555; /* Dark gray border for contrast */
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.car-table th {
+    background-color: #f1c40f; /* Bright yellow for the Bat-Signal theme */
+    color: #0e0e0e; /* Black text on yellow */
+    text-transform: uppercase; /* Bold text for headers */
+    letter-spacing: 1px;
+}
+
+.car-table tr:nth-child(even) {
+    background-color: #2f2f2f; /* Dark gray background for even rows */
+}
+
+.car-table tr:nth-child(odd) {
+    background-color: #212121; /* Darker gray for odd rows */
+}
+
+.car-table tr:hover {
+    background-color: #f1c40f; /* Bat-Signal yellow on hover */
+    color: #0e0e0e; /* Dark text when hovered */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Edit button styles */
+.edit-btn {
+    background-color: #8e44ad; /* Dark purple for a mysterious Batman vibe */
+    color: #ecf0f1; /* Light text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #9b59b6; /* Lighter purple when hovered */
+    transform: scale(1.1); /* Button grows slightly when hovered */
+}
+
+.edit-btn:active {
+    background-color: #34495e; /* Darker color on click */
+}
+
+/* Animation on table load */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.car-table {
+    animation: slideIn 1s ease-out;
+}
+
+/* Optional: Bat-Signal overlay (optional feature) */
+.bat-signal {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    color: #f1c40f; /* Bright yellow */
+    text-shadow: 0px 0px 10px rgba(241, 196, 15, 0.7), 0px 0px 20px rgba(241, 196, 15, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+/* Show Bat-Signal when hovering on button */
+.edit-btn:hover + .bat-signal {
+    display: block;
+}
+#search-bar {
+    width: 300px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
